@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   ssr: false,
   compatibilityDate: '2025-07-15',
-  devtools: { enabled: process.env.NODE_ENV !== 'production' },
+  devtools: { enabled: true },
 
   app: {
     pageTransition: { name: 'page', mode: 'out-in' }
@@ -18,7 +18,8 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
     '@nuxtjs/i18n',
-    '@vite-pwa/nuxt'
+    '@vite-pwa/nuxt',
+    '@nuxt/icon'
   ],
 
   pwa: {
