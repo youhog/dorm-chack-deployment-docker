@@ -4,13 +4,17 @@ from .endpoints import (
     auth, users, roles, rooms, items, inspections, 
     buildings, beds, students, lights_out, patrol_locations,
     permissions, admin, admin_inspections, import_data, reports, notifications, backup,
-    dashboard, search, images, audit_logs # Add audit_logs
+
+    dashboard, search, images, audit_logs,announcements # Add audit_logs
+
 )
+
 
 api_router = APIRouter()
 
 api_router.include_router(auth.router, tags=["auth"])
 api_router.include_router(images.router, prefix="/images", tags=["images"]) # New images router
+api_router.include_router(announcements.router, prefix="/announcements", tags=["announcements"]) # New announcements router
 api_router.include_router(users.router, prefix="/users", tags=["users"])
 api_router.include_router(roles.router, prefix="/roles", tags=["roles"])
 api_router.include_router(permissions.router, prefix="/permissions", tags=["permissions"])
