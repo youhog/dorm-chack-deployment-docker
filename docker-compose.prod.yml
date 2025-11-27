@@ -2,30 +2,33 @@ version: '3.8'
 
 services:
   backend:
-    # CHANGE THIS: Replace with your actual image path
-    # Format: ghcr.io/<username>/<repo-name>/backend:latest
-    image: ghcr.io/your-username/your-repo-name/backend:latest
+    # [修改] 指向您的 GHCR 映像檔
+    image: ghcr.io/yu320/dorm-chack-deployment-docker/backend:latest
     restart: always
+    # [修改] 讓它讀取 Dockge 介面設定的環境變數
     env_file:
-      - backend/.env
+      - .env
     volumes:
+      # 確保上傳的圖片可以持久化保存
       - ./uploads:/app/uploads
     networks:
       - app-network
 
   frontend:
-    # CHANGE THIS: Replace with your actual image path
-    image: ghcr.io/your-username/your-repo-name/frontend:latest
+    # [修改] 指向您的 GHCR 映像檔
+    image: ghcr.io/yu320/dorm-chack-deployment-docker/frontend:latest
     restart: always
     networks:
       - app-network
 
   nginx:
-    # CHANGE THIS: Replace with your actual image path
-    image: ghcr.io/your-username/your-repo-name/nginx:latest
+    # [修改] 指向您的 GHCR 映像檔 (包含設定檔)
+    image: ghcr.io/yu320/dorm-chack-deployment-docker/nginx:latest
     restart: always
     ports:
-      - "80:80"
+      # [關鍵修改] 外部 8081 對應內部 80
+      # NPM (Nginx Proxy Manager) 請設定 Forward Host IP 為 TrueNAS IP，Port 為 8081
+      - "8081:80"
     depends_on:
       - backend
       - frontend
@@ -37,10 +40,10 @@ services:
     restart: always
     environment:
       MYSQL_DATABASE: 'app_db'
-      # SECURITY WARNING: You MUST change these passwords in your server environment!
       MYSQL_USER: 'prod_user'
-      MYSQL_PASSWORD: 'CHANGE_THIS_PASSWORD_TO_SOMETHING_SECURE'
-      MYSQL_ROOT_PASSWORD: 'CHANGE_THIS_ROOT_PASSWORD_TO_SOMETHING_SECURE' 
+      # [安全性] 使用變數，請在 Dockge 的 .env 區域設定密碼
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
     volumes:
       - db-data:/var/lib/mysql
     networks:
@@ -52,7 +55,8 @@ services:
     environment:
       PMA_HOST: db
       PMA_USER: prod_user
-      PMA_PASSWORD: 'CHANGE_THIS_PASSWORD_TO_SOMETHING_SECURE'
+      PMA_PASSWORD: ${DB_PASSWORD}
+      # 這是配合您 Nginx config 中的設定
       PMA_ABSOLUTE_URI: /sys_db_admin_x9zp2/
     networks:
       - app-network
