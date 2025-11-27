@@ -125,6 +125,12 @@
               </button>
             </div>
           </div>
+          <div class="flex items-center mb-6">
+            <input id="privacy-policy" type="checkbox" required class="w-4 h-4 text-primary-600 bg-white/10 border-white/20 rounded focus:ring-primary-500 focus:ring-2">
+            <label for="privacy-policy" class="ml-2 text-sm font-medium text-white/90">
+              我同意 <a href="#" @click.prevent="showPrivacyModal = true" class="text-primary-300 hover:text-primary-200 underline">隱私權及網站安全政策</a>
+            </label>
+          </div>
           <div>
             <button
               type="submit"
@@ -143,6 +149,15 @@
         </div>
       </div>
     </div>
+
+    <CommonModal :isOpen="showPrivacyModal" :title="currentPrivacyData.title" :showConfirm="false" :closeText="$t('close')" @close="showPrivacyModal = false">
+      <div class="text-gray-700 dark:text-gray-300 max-h-96 overflow-y-auto p-2">
+        <div v-for="(section, index) in currentPrivacyData.sections" :key="index" class="mb-4">
+          <h4 class="font-bold mb-2">{{ section.heading }}</h4>
+          <p class="whitespace-pre-wrap">{{ section.content }}</p>
+        </div>
+      </div>
+    </CommonModal>
   </div>
 </template>
 
@@ -153,6 +168,8 @@ import { useAuth } from '~/composables/useAuth';
 import { useSnackbar } from '~/composables/useSnackbar';
 import { useI18n } from '#imports';
 import Snackbar from '~/components/common/Snackbar.vue';
+import privacyDataZh from '~/data/privacy.json';
+import privacyDataEn from '~/data/privacy-en.json';
 
 definePageMeta({
   layout: false,
@@ -169,6 +186,10 @@ const currentLocale = computed(() => {
   return locales.value.find(l => l.code === locale.value);
 });
 
+const currentPrivacyData = computed(() => {
+  return locale.value === 'en' ? privacyDataEn : privacyDataZh;
+});
+
 const availableLocales = computed(() => {
   return locales.value.filter(l => l.code !== locale.value);
 });
@@ -181,6 +202,7 @@ const password = ref('');
 const confirmPassword = ref('');
 const showPassword = ref(false);
 const showConfirmPassword = ref(false);
+const showPrivacyModal = ref(false);
 const loading = ref(false);
 const emailDomain = '@gmail.com'; // Configurable domain
 

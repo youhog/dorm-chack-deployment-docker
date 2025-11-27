@@ -18,7 +18,7 @@
       </div>
     </div>
     
-    <div class="relative z-10 w-full max-w-md">
+    <div class="relative z-10 w-full max-w-sm">
       <div class="bg-white/10 dark:bg-black/20 backdrop-blur-lg rounded-2xl shadow-2xl border border-white/20 p-8 text-white">
         <div class="text-center mb-8">
           <div class="flex justify-center mb-4">
@@ -43,11 +43,12 @@
               name="username"
               type="text"
               required
-              class="appearance-none block w-full px-3 py-2 border border-white/30 bg-white/20 rounded-md shadow-sm placeholder-white/50 text-white focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+              class="appearance-none block w-full px-3 py-3 border border-white/30 bg-white/20 rounded-md shadow-sm placeholder-white/50 text-white focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
             />
           </div>
 
           <div>
+            <label for="password" class="block text-sm font-medium text-white/90 mb-1">{{ $t('login.password') }}</label>
             <div class="relative">
               <input 
                 v-model="credentials.password" 
@@ -55,7 +56,7 @@
                 name="password"
                 :type="showPassword ? 'text' : 'password'"
                 required
-                class="appearance-none block w-full px-3 py-2 border border-white/30 bg-white/20 rounded-md shadow-sm placeholder-white/50 text-white focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm pr-10"
+                class="appearance-none block w-full px-3 py-3 border border-white/30 bg-white/20 rounded-md shadow-sm placeholder-white/50 text-white focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm pr-10"
               />
               <button
                 type="button"
