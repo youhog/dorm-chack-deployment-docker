@@ -9,7 +9,7 @@
     <!-- Inspection Items -->
     <div class="space-y-6">
       <div v-for="(item, index) in inspectionDetails" :key="item.item_id" class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 transition-all duration-300">
-        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">{{ $t(`items.${items.find(i => i.id === item.item_id)?.name.toLowerCase()}`) }}</h3>
+        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">{{ getItemName(item.item_id) }}</h3>
         
         <div class="mt-4">
           <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{{ $t('dashboard.status') }}</label>
@@ -104,11 +104,12 @@ import Compressor from 'compressorjs';
 import VueSignaturePad from 'vue3-signature';
 import LightBox from '~/components/common/LightBox.vue';
 
-const { t } = useI18n();
+const { t, locale } = useI18n();
 
 interface InspectionItem {
   id: string;
   name: string;
+  name_en?: string;
   description: string;
   is_active: boolean;
 }
@@ -149,6 +150,13 @@ const lightBoxImageUrl = ref('');
 const openLightBox = (imageUrl: string) => {
   lightBoxImageUrl.value = imageUrl;
   isLightBoxVisible.value = true;
+};
+
+const getItemName = (itemId: string) => {
+  const item = items.value.find(i => i.id === itemId);
+  if (!item) return 'Unknown Item';
+  if (locale.value === 'en' && item.name_en) return item.name_en;
+  return item.name;
 };
 
 const fetchItems = async () => {

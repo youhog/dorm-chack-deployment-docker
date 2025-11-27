@@ -82,7 +82,9 @@
     "viewAll": "查看全部",
     "newInspection": "新增檢查",
     "manageStudents": "管理學生",
-    "manageRooms": "管理房間"
+    "manageRooms": "管理房間",
+    "passRate": "檢查通過率",
+    "topDamageTypes": "常見損壞類型"
   },
   "inspection": {
     "newTitle": "宿舍房間檢查",
@@ -165,6 +167,7 @@
     "manageInspections": "管理檢查紀錄",
     "manageDorms": "宿舍管理",
     "systemSettings": "系統設定",
+    "announcementsTitle": "公告管理",
     "auditLogsTitle": "審計日誌",
     "auditLogsDescription": "查看系統操作日誌，追蹤使用者活動。",
     "filterByAction": "依操作篩選...",

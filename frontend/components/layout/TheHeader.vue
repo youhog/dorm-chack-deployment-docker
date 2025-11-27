@@ -181,7 +181,7 @@ const handleLogout = async () => {
     </header>
     <div v-if="isAuthenticated" class="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-40">
       <div class="container mx-auto px-4">
-        <div class="flex flex-wrap border-b border-gray-200 dark:border-gray-700 w-full" :class="{'!flex !flex-col': mobileMenuOpen}">
+        <div class="flex flex-nowrap overflow-x-auto border-b border-gray-200 dark:border-gray-700 w-full scrollbar-hide" :class="{'!flex !flex-col !overflow-visible !whitespace-normal': mobileMenuOpen}">
           <NuxtLink :to="localePath('/')" @click="mobileMenuOpen = false" class="tab-button" active-class="tab-active">{{ $t('navigation.home') }}</NuxtLink>
           
           <!-- Admin Navigation -->
@@ -222,6 +222,7 @@ const handleLogout = async () => {
                 <svg class="w-4 h-4 ml-1 transition-transform" :class="{'rotate-180': isSysOpen}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
               </button>
               <div ref="sysDropdownRef" v-if="isSysOpen" class="dropdown-menu-floating right-0" :class="{'dropdown-active': isSysOpen}">
+                <NuxtLink :to="localePath('/admin/announcements')" @click="closeSysDropdown(); mobileMenuOpen = false;" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">{{ $t('admin.announcementsTitle') || 'Announcements' }}</NuxtLink>
                 <NuxtLink :to="localePath('/admin/users')" @click="closeSysDropdown(); mobileMenuOpen = false;" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">{{ $t('navigation.users') }}</NuxtLink>
                 <NuxtLink :to="localePath('/admin/settings')" @click="closeSysDropdown(); mobileMenuOpen = false;" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">{{ $t('navigation.settings') }}</NuxtLink>
                 <NuxtLink :to="localePath('/admin/advanced-search')" @click="closeSysDropdown(); mobileMenuOpen = false;" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">{{ $t('navigation.advancedSearch') }}</NuxtLink>
@@ -252,43 +253,6 @@ const handleLogout = async () => {
               <NuxtLink v-if="hasPermission('lights_out_check_perform')" :to="localePath('/patrol/history')" @click="closePatrolDropdown(); mobileMenuOpen = false;" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">{{ $t('navigation.inspectionHistory') }}</NuxtLink>
             </div>
           </div>
-
-          <div v-if="isAdmin" class="relative">
-            <button ref="adminToggleRef" @click="toggleAdminDropdown" class="tab-button flex items-center" :class="{ 'tab-active': $route.path.startsWith('/admin') && $route.path !== '/admin/dashboard' && $route.path !== '/admin/new-inspection' }">
-              <span>{{ $t('navigation.admin') }}</span>
-              <svg class="w-4 h-4 ml-1 transition-transform" :class="{'rotate-180': isAdminOpen}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-            </button>
-            <div ref="adminDropdownRef" v-if="isAdminOpen" class="dropdown-menu-floating right-0" :class="{'dropdown-active': isAdminOpen}">
-              <!-- 檢查管理 -->
-              <NuxtLink :to="localePath('/admin/inspections')" @click="closeAdminDropdown(); mobileMenuOpen = false;" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">{{ $t('navigation.inspections') }}</NuxtLink>
-              <NuxtLink :to="localePath('/admin/records')" @click="closeAdminDropdown(); mobileMenuOpen = false;" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">{{ $t('navigation.records') }}</NuxtLink>
-              <NuxtLink :to="localePath('/admin/items')" @click="closeAdminDropdown(); mobileMenuOpen = false;" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">{{ $t('navigation.items') }}</NuxtLink>
-              
-              <div class="border-t border-gray-200 dark:border-gray-600 my-1"></div>
-              
-              <!-- 資料管理 -->
-              <NuxtLink :to="localePath('/admin/students')" @click="closeAdminDropdown(); mobileMenuOpen = false;" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">{{ $t('navigation.students') }}</NuxtLink>
-              <NuxtLink :to="localePath('/admin/rooms')" @click="closeAdminDropdown(); mobileMenuOpen = false;" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">{{ $t('navigation.rooms') }}</NuxtLink>
-              <NuxtLink :to="localePath('/admin/rooms-students')" @click="closeAdminDropdown(); mobileMenuOpen = false;" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">{{ $t('navigation.roomsStudents') }}</NuxtLink>
-              
-              <div class="border-t border-gray-200 dark:border-gray-600 my-1"></div>
-              
-              <!-- 系統設定 -->
-              <NuxtLink :to="localePath('/admin/users')" @click="closeAdminDropdown(); mobileMenuOpen = false;" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">{{ $t('navigation.users') }}</NuxtLink>
-              <NuxtLink :to="localePath('/admin/settings')" @click="closeAdminDropdown(); mobileMenuOpen = false;" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">{{ $t('navigation.settings') }}</NuxtLink>
-              
-              <div class="border-t border-gray-200 dark:border-gray-600 my-1"></div>
-              
-              <!-- 工具功能 -->
-              <NuxtLink :to="localePath('/admin/advanced-search')" @click="closeAdminDropdown(); mobileMenuOpen = false;" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">{{ $t('navigation.advancedSearch') }}</NuxtLink>
-              <NuxtLink :to="localePath('/admin/pdf-reports')" @click="closeAdminDropdown(); mobileMenuOpen = false;" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">{{ $t('navigation.pdfReports') }}</NuxtLink>
-              <NuxtLink :to="localePath('/admin/email-notifications')" @click="closeAdminDropdown(); mobileMenuOpen = false;" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">{{ $t('navigation.emailNotifications') }}</NuxtLink>
-              <NuxtLink :to="localePath('/admin/data-backup')" @click="closeAdminDropdown(); mobileMenuOpen = false;" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">{{ $t('navigation.dataBackup') }}</NuxtLink>
-              <NuxtLink :to="localePath('/admin/data-import')" @click="closeAdminDropdown(); mobileMenuOpen = false;" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">{{ $t('navigation.dataImport') }}</NuxtLink>
-            </div>
-          </div>
-          <template v-if="isAuthenticated">
-          </template>
         </div>
       </div>
     </div>
