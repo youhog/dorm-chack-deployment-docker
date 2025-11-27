@@ -130,7 +130,9 @@ class InspectionItem(Base):
 
     id = Column(CHAR(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     name = Column(String(100), nullable=False)
+    name_en = Column(String(100), nullable=True)
     description = Column(String(255))
+    description_en = Column(String(255), nullable=True)
     is_active = Column(Boolean, default=True)
 
 
@@ -285,7 +287,9 @@ class Announcement(Base):
     
     id = Column(CHAR(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     title = Column(String(200), nullable=False)
+    title_en = Column(String(200), nullable=True)
     content = Column(Text, nullable=False)
+    content_en = Column(Text, nullable=True)
     tag = Column(String(50), nullable=False)
     tag_type = Column(Enum(TagType), nullable=False, default=TagType.primary)
     is_active = Column(Boolean, default=True)

@@ -10,7 +10,7 @@ from urllib.parse import urljoin # Import urljoin
 from sqlalchemy import select # For verifying user status
 
 from ... import schemas, auth as auth_dependency
-from ...crud import crud_user # Make sure crud_user is imported
+from ...crud import crud_user, crud_audit # Make sure crud_user and crud_audit are imported
 from ...utils import security # Import security module
 from ...utils.email import send_email as send_email_util # Import email sender
 from ...config import settings
@@ -41,6 +41,17 @@ async def login_for_access_token(
             headers={"WWW-Authenticate": "Bearer"},
         )
     
+    # Audit Log: Login
+    await crud_audit.create_audit_log(
+        db=auth_service.db,
+        action="LOGIN",
+        resource_type="User",
+        resource_id=str(user.id),
+        user_id=user.id,
+        details={"username": user.username},
+        ip_address=request.client.host if request.client else None
+    )
+
     access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = auth_service.create_access_token(
         data={"sub": user.username}, expires_delta=access_token_expires

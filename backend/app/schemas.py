@@ -199,12 +199,16 @@ class TokenData(BaseModel):
 # --- Item Schemas ---
 class InspectionItemBase(BaseModel):
     name: str
+    name_en: Optional[str] = None
     description: Optional[str] = None
+    description_en: Optional[str] = None
 class InspectionItemCreate(InspectionItemBase):
     pass
 class InspectionItemUpdate(BaseModel):
     name: Optional[str] = None
+    name_en: Optional[str] = None
     description: Optional[str] = None
+    description_en: Optional[str] = None
     is_active: Optional[bool] = None
 class InspectionItemInDBBase(InspectionItemBase):
     id: uuid.UUID
@@ -402,7 +406,9 @@ class ResetPassword(BaseModel):
 # --- Announcement Schemas ---
 class AnnouncementBase(BaseModel):
     title: str
+    title_en: Optional[str] = None
     content: str
+    content_en: Optional[str] = None
     tag: str
     tag_type: str = "primary"
 
@@ -413,7 +419,9 @@ class AnnouncementCreate(AnnouncementBase):
 
 class AnnouncementUpdate(BaseModel):
     title: Optional[str] = None
+    title_en: Optional[str] = None
     content: Optional[str] = None
+    content_en: Optional[str] = None
     tag: Optional[str] = None
     tag_type: Optional[str] = None
     is_active: Optional[bool] = None
@@ -430,7 +438,7 @@ class AnnouncementResponse(AnnouncementBase):
 class PaginatedAnnouncements(BaseModel):
     total: int
     records: List[AnnouncementResponse]
-=======
+
 # --- Audit Log Schemas ---
 class AuditLog(BaseModel):
     id: uuid.UUID
