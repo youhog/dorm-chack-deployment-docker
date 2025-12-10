@@ -221,7 +221,7 @@ const handleLogout = async () => {
     </header>
     <div v-if="isAuthenticated" class="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-40">
       <div class="container mx-auto px-4">
-        <div class="flex flex-nowrap overflow-x-auto md:overflow-visible border-b border-gray-200 dark:border-gray-700 w-full scrollbar-hide" :class="{'!flex !flex-col !overflow-visible !whitespace-normal': mobileMenuOpen}">
+        <div class="flex flex-wrap border-b border-gray-200 dark:border-gray-700 w-full" :class="{'!flex-col': mobileMenuOpen}">
           <NuxtLink :to="localePath('/')" @click="mobileMenuOpen = false" class="tab-button" active-class="tab-active">{{ $t('navigation.home') }}</NuxtLink>
           
           <!-- Admin Navigation -->
@@ -288,9 +288,10 @@ const handleLogout = async () => {
               <svg class="w-4 h-4 ml-1 transition-transform" :class="{'rotate-180': isPatrolOpen}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
             </button>
             <div ref="patrolDropdownRef" v-if="isPatrolOpen" class="dropdown-menu-floating right-0" :class="{'dropdown-active': isPatrolOpen}">
-              <NuxtLink v-if="hasPermission('manage_patrol_locations')" :to="localePath('/patrol/locations')" @click="closePatrolDropdown(); mobileMenuOpen = false;" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">{{ $t('navigation.patrolLocations') }}</NuxtLink>
-              <NuxtLink v-if="hasPermission('lights_out_check_perform')" :to="localePath('/patrol/inspect')" @click="closePatrolDropdown(); mobileMenuOpen = false;" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">{{ $t('navigation.performInspection') }}</NuxtLink>
-              <NuxtLink v-if="hasPermission('lights_out_check_perform')" :to="localePath('/patrol/history')" @click="closePatrolDropdown(); mobileMenuOpen = false;" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">{{ $t('navigation.inspectionHistory') }}</NuxtLink>
+              <NuxtLink v-if="hasPermission('reports:view_statistics')" :to="localePath('/patrol/dashboard')" @click="closePatrolDropdown(); mobileMenuOpen = false;" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">{{ $t('navigation.patrolDashboard') }}</NuxtLink>
+              <NuxtLink v-if="hasPermission('patrol_locations:manage')" :to="localePath('/patrol/locations')" @click="closePatrolDropdown(); mobileMenuOpen = false;" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">{{ $t('navigation.patrolSettings') }}</NuxtLink>
+              <NuxtLink v-if="hasPermission('patrols:perform')" :to="localePath('/patrol/inspect')" @click="closePatrolDropdown(); mobileMenuOpen = false;" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">{{ $t('navigation.performInspection') }}</NuxtLink>
+              <NuxtLink v-if="hasPermission('patrols:view_all')" :to="localePath('/patrol/history')" @click="closePatrolDropdown(); mobileMenuOpen = false;" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">{{ $t('navigation.inspectionHistory') }}</NuxtLink>
             </div>
           </div>
         </div>

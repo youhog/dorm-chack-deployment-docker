@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, Query, Request # Import Request
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import List, Optional
+from datetime import datetime
 
 from ... import schemas, models
 from ...auth import get_current_active_user, PermissionChecker
@@ -43,12 +44,15 @@ async def read_lights_out_patrols(
     skip: int = 0,
     limit: int = 100,
     building_id: Optional[int] = Query(None, description="Filter patrols by building ID"),
+    start_date: Optional[datetime] = Query(None, description="Start date filter"),
+    end_date: Optional[datetime] = Query(None, description="End date filter"),
     current_user: schemas.User = Depends(get_current_active_user),
 ):
     """
     Retrieve a list of lights-out patrol records. Requires 'patrols:view_all' permission.
     """
     patrols_data = await crud_lights_out.get_multi_filtered(
-        db=db, skip=skip, limit=limit, building_id=building_id
+        db=db, skip=skip, limit=limit, building_id=building_id,
+        start_date=start_date, end_date=end_date
     )
     return {"total": patrols_data["total"], "records": patrols_data["records"]}

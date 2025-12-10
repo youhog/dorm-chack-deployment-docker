@@ -102,11 +102,11 @@
           <div v-if="modalTarget === 'room'" class="space-y-4">
             <div>
               <label for="roomNumber" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ $t('admin.roomNumber') }}</label>
-              <input type="text" v-model="editableItem.room_number" id="roomNumber" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+              <input type="text" v-model="editableItem.room_number" id="roomNumber" class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white" required>
             </div>
             <div>
               <label for="roomType" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ $t('admin.roomType') }}</label>
-              <input type="text" v-model="editableItem.room_type" id="roomType" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+              <input type="text" v-model="editableItem.room_type" id="roomType" class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
             </div>
           </div>
 
@@ -114,11 +114,11 @@
           <div v-if="modalTarget === 'bed'" class="space-y-4">
             <div>
               <label for="bedNumber" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ $t('admin.bedNumber') }}</label>
-              <input type="text" v-model="editableItem.bed_number" id="bedNumber" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+              <input type="text" v-model="editableItem.bed_number" id="bedNumber" class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white" required>
             </div>
              <div>
               <label for="bedStatus" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ $t('dashboard.status') }}</label>
-              <select v-model="editableItem.status" id="bedStatus" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+              <select v-model="editableItem.status" id="bedStatus" class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
                 <option value="available">{{ $t('admin.available') }}</option>
                 <option value="occupied">{{ $t('admin.occupied') }}</option>
                 <option value="reserved">{{ $t('admin.reserved') }}</option>

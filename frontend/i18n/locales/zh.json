@@ -9,7 +9,9 @@
     "cancel": "取消",
     "chinese": "中文",
     "englishOptional": "英文 (選填)",
-    "save": "儲存"
+    "save": "儲存",
+    "submit": "提交",
+    "back": "返回"
   },
   "guest": {
     "howItWorks": "運作方式",
@@ -488,9 +490,10 @@
     "dataBackup": "資料備份",
     "dataImport": "資料匯入",
     "patrol": "巡視",
-    "patrolLocations": "公共空間管理",
+    "patrolSettings": "公共空間管理",
     "performInspection": "執行巡視",
     "inspectionHistory": "巡視記錄",
+    "patrolDashboard": "巡視儀表板",
     "logout": "登出"
   },
   "patrol": {

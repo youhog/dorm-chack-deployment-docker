@@ -9,7 +9,9 @@
     "cancel": "Cancel",
     "chinese": "Chinese",
     "englishOptional": "English (Optional)",
-    "save": "Save"
+    "save": "Save",
+    "submit": "Submit",
+    "back": "Back"
   },
   "guest": {
     "howItWorks": "How it Works",
@@ -515,9 +517,11 @@
     "roomsStudents": "Rooms & Students",
     "items": "Items",
     "patrol": "Patrol",
-    "patrolLocations": "Public Space Management",
+    "patrolLocations": "Space Settings",
+    "patrolSettings": "Space Settings",
     "performInspection": "Perform Inspection",
     "inspectionHistory": "Inspection History",
+    "patrolDashboard": "Patrol Dashboard",
     "users": "Users",
     "settings": "Settings",
     "pdfReports": "PDF Reports",

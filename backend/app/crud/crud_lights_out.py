@@ -25,7 +25,10 @@ class CRUDLightsOutPatrol(CRUDBase[LightsOutPatrol, LightsOutPatrolCreate, Dict[
         return result.scalars().first()
 
     async def get_multi_filtered(
-        self, db: AsyncSession, *, skip: int = 0, limit: int = 100, building_id: Optional[int] = None
+        self, db: AsyncSession, *, skip: int = 0, limit: int = 100, 
+        building_id: Optional[int] = None,
+        start_date: Optional[datetime] = None,
+        end_date: Optional[datetime] = None
     ) -> Dict[str, Any]:
         query = select(LightsOutPatrol).options(
             joinedload(LightsOutPatrol.building),
@@ -34,6 +37,12 @@ class CRUDLightsOutPatrol(CRUDBase[LightsOutPatrol, LightsOutPatrolCreate, Dict[
         )
         if building_id:
             query = query.filter(LightsOutPatrol.building_id == building_id)
+        
+        if start_date:
+            query = query.filter(LightsOutPatrol.patrol_time >= start_date)
+        
+        if end_date:
+            query = query.filter(LightsOutPatrol.patrol_time <= end_date)
             
         count_query = select(func.count()).select_from(query.subquery())
         total_result = await db.execute(count_query)

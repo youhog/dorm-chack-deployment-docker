@@ -65,12 +65,12 @@
           <div class="space-y-4">
             <div>
               <label for="username" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ $t('admin.username') }}</label>
-              <input type="text" v-model="editableUser.username" id="username" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+              <input type="text" v-model="editableUser.username" id="username" class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white" required>
             </div>
             <div v-if="modalMode === 'create'">
               <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ $t('admin.password') }}</label>
               <div class="relative">
-                <input type="password" v-model="editableUser.password" id="password" :type="showPassword ? 'text' : 'password'" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm pr-10" required>
+                <input type="password" v-model="editableUser.password" id="password" :type="showPassword ? 'text' : 'password'" class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm pr-10 bg-white dark:bg-gray-700 text-gray-900 dark:text-white" required>
                 <button
                   type="button"
                   @click="showPassword = !showPassword"
@@ -82,17 +82,17 @@
             </div>
              <div v-if="modalMode === 'create'">
               <label for="studentIdNumber" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ $t('admin.studentId') }}</label>
-              <input type="text" v-model="editableUser.student_id_number" id="studentIdNumber" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+              <input type="text" v-model="editableUser.student_id_number" id="studentIdNumber" class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white" required>
             </div>
             <div class="flex items-center">
-              <input type="checkbox" v-model="editableUser.is_active" id="isActive" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+              <input type="checkbox" v-model="editableUser.is_active" id="isActive" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700">
               <label for="isActive" class="ml-2 block text-sm text-gray-900 dark:text-gray-300">{{ $t('admin.active') }}</label>
             </div>
             <div>
               <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ $t('admin.roles') }}</label>
               <div class="mt-2 space-y-2">
                 <div v-for="role in allRoles" :key="role.id" class="flex items-center">
-                  <input type="checkbox" :id="`role-${role.id}`" :value="role.id" v-model="editableUser.roles" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                  <input type="checkbox" :id="`role-${role.id}`" :value="role.id" v-model="editableUser.roles" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700">
                   <label :for="`role-${role.id}`" class="ml-2 block text-sm text-gray-900 dark:text-gray-300">{{ role.name }}</label>
                 </div>
               </div>

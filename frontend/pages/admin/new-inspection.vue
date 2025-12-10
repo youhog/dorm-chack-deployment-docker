@@ -93,7 +93,7 @@
 
               <!-- Comment & Photo (Only if not OK) -->
               <div v-if="item.status !== 'ok'" class="space-y-3">
-                <textarea v-model="item.comment" rows="2" :placeholder="$t('inspection.comment')" class="w-full text-sm border-gray-300 rounded-md"></textarea>
+                <textarea v-model="item.comment" rows="2" :placeholder="$t('inspection.comment')" class="w-full text-sm border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"></textarea>
                 <!-- Simplified Photo Upload for Batch Mode -->
                 <!-- Ideally reuse a PhotoUpload component -->
                 <input type="file" @change="handleBatchPhotoUpload($event, sIndex, iIndex)" accept="image/*" class="text-xs">

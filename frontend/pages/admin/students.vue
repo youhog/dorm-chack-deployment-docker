@@ -62,15 +62,15 @@
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label for="fullName" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ $t('admin.fullName') }}</label>
-              <input type="text" v-model="editableStudent.full_name" id="fullName" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required />
+              <input type="text" v-model="editableStudent.full_name" id="fullName" class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white" required />
             </div>
             <div>
               <label for="studentId" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ $t('admin.studentId') }}</label>
-              <input type="text" v-model="editableStudent.student_id_number" id="studentId" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required />
+              <input type="text" v-model="editableStudent.student_id_number" id="studentId" class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white" required />
             </div>
             <div>
               <label for="className" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ $t('admin.class') }}</label>
-              <input type="text" v-model="editableStudent.class_name" id="className" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" />
+              <input type="text" v-model="editableStudent.class_name" id="className" class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white" />
             </div>
             <div>
               <label for="bedId" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ $t('admin.beds') }}</label>

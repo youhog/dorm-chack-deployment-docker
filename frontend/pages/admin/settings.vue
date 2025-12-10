@@ -96,13 +96,13 @@
           <div class="space-y-4">
             <div>
               <label for="roleName" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ $t('admin.name') }}</label>
-              <input type="text" v-model="editableRole.name" id="roleName" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+              <input type="text" v-model="editableRole.name" id="roleName" class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white" required>
             </div>
             <div>
               <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ $t('admin.permissions') }}</label>
               <div class="mt-2 grid grid-cols-2 md:grid-cols-3 gap-4 max-h-60 overflow-y-auto p-2 border rounded-md">
                 <div v-for="permission in permissions" :key="permission.id" class="flex items-center">
-                  <input type="checkbox" :id="`perm-${permission.id}`" :value="permission.id" v-model="editableRole.permissions" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                  <input type="checkbox" :id="`perm-${permission.id}`" :value="permission.id" v-model="editableRole.permissions" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700">
                   <label :for="`perm-${permission.id}`" class="ml-2 block text-sm text-gray-900 dark:text-gray-300">{{ $t('permissions.' + permission.name + '.title') }}</label>
                 </div>
               </div>
@@ -124,11 +124,11 @@
           <div class="space-y-4">
             <div>
               <label for="patrolName" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ $t('admin.name') }}</label>
-              <input type="text" v-model="editablePatrolLocation.name" id="patrolName" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+              <input type="text" v-model="editablePatrolLocation.name" id="patrolName" class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white" required>
             </div>
             <div>
               <label for="patrolHousehold" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ $t('admin.householdOptional') }}</label>
-              <input type="text" v-model="editablePatrolLocation.household" id="patrolHousehold" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+              <input type="text" v-model="editablePatrolLocation.household" id="patrolHousehold" class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
             </div>
           </div>
           <div class="flex justify-end space-x-4 mt-6">

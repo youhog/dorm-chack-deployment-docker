@@ -15,15 +15,15 @@
             type="text"
             v-model="searchParams.student_name"
             :placeholder="$t('admin.filterByStudent')"
-            class="w-full px-3 py-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
           />
           <input
             type="text"
             v-model="searchParams.room_number"
             :placeholder="$t('admin.filterByRoom')"
-            class="w-full px-3 py-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
           />
-          <select v-model="searchParams.status" class="w-full px-3 py-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600">
+          <select v-model="searchParams.status" class="w-full px-3 py-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
             <option value="">{{ $t('admin.allStatuses') }}</option>
             <option value="submitted">{{ $t('inspection.status.submitted') }}</option>
             <option value="passed">{{ $t('dashboard.passed') }}</option>
@@ -32,14 +32,14 @@
           <input
             type="date"
             v-model="searchParams.start_date"
-            class="w-full px-3 py-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
           />
           <input
             type="date"
             v-model="searchParams.end_date"
-            class="w-full px-3 py-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
           />
-          <select v-model="searchParams.item_status" class="w-full px-3 py-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600">
+          <select v-model="searchParams.item_status" class="w-full px-3 py-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white">
             <option value="">All Item Statuses</option>
             <option value="ok">{{ $t('inspection.status.ok') }}</option>
             <option value="damaged">{{ $t('inspection.status.damaged') }}</option>
