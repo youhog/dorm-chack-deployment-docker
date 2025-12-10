@@ -4,23 +4,17 @@ FROM node:18-alpine AS builder
 # Set working directory
 WORKDIR /app
 
-# Copy package.json only to allow caching of dependency download
-COPY package.json ./
-
 # Install build tools
 RUN apk add --no-cache python3 make g++
 
-# Install dependencies ignoring scripts (skips nuxt prepare, avoids missing file errors)
-RUN npm install --legacy-peer-deps --ignore-scripts
-
-# Copy the rest of the application source code
+# Copy all source code first to ensure nuxt prepare has context
 COPY . .
 
-# Remove host package-lock.json to avoid platform conflicts (Windows vs Alpine)
-RUN rm -f package-lock.json
+# Force clean install: Remove host lockfile to avoid Windows/Linux conflicts
+# We also clean node_modules just in case, though .dockerignore should exclude it
+RUN rm -rf package-lock.json node_modules
 
-# Re-run install to build native dependencies and run postinstall scripts (nuxt prepare)
-# This uses the packages downloaded in the previous step but ensures everything is correctly built/configured
+# Single, clean install to ensure native dependencies are built for Alpine
 RUN npm install --legacy-peer-deps
 
 # Build the application for production
