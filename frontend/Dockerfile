@@ -16,6 +16,9 @@ RUN npm install --legacy-peer-deps --ignore-scripts
 # Copy the rest of the application source code
 COPY . .
 
+# Rebuild native dependencies (skipped by --ignore-scripts) and run nuxt prepare
+RUN npm rebuild && npm run postinstall
+
 # Build the application for production
 # This will create the .output directory
 RUN npm run build
