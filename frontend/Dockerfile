@@ -4,20 +4,17 @@ FROM node:18-alpine AS builder
 # Set working directory
 WORKDIR /app
 
-# Copy package.json only to avoid lockfile conflicts across platforms
-COPY package.json ./
+# Copy package.json, lockfile, and nuxt config to allow postinstall (nuxt prepare) to run
+COPY package.json package-lock.json nuxt.config.ts ./
 
 # Install build tools for native dependencies (if any)
 RUN apk add --no-cache python3 make g++
 
 # Install dependencies (generating a new package-lock.json)
-RUN npm install --legacy-peer-deps --ignore-scripts
+RUN npm install --legacy-peer-deps
 
 # Copy the rest of the application source code
 COPY . .
-
-# Rebuild native dependencies (skipped by --ignore-scripts) and run nuxt prepare
-RUN npm rebuild && npm run postinstall
 
 # Build the application for production
 # This will create the .output directory
